@@ -1,0 +1,283 @@
+@import "_normalise.scss";
+@import "mixin.scss";
+
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  @include background('../img/bg.png', $repeat: 'repeat');
+}
+
+.placeholder_custom {
+
+}
+
+.b_main_container {
+  width: 900px;
+  margin: auto;
+}
+
+.b_one_todo_container {
+  width: 700px;
+  margin: 20px auto 0;
+}
+
+.b_todo_header {
+  position: relative;
+  @include moobg(linear-gradient(top, #4e7fbd 0%, #4d7cb8 16%, #3c65a4 80%, #355a94 100%));
+  height: 50px;
+  @include moo(box-sizing, border-box);
+  border: 1px solid #315589;
+  box-shadow: 0 1px 0 #8cb0d6 inset, 0 -1px 5px -4px #22416e inset;
+  padding-top: 12px;
+  padding-left: 15px;
+  &:hover {
+	.b_todo_header_action_button {
+	  div {
+		opacity: 0.5;
+	  }
+	}
+  }
+  .b_todo_header_action_button {
+	div:hover {
+	  opacity: 1;
+	  @include moo(transition, opacity 0.5s);
+	}
+  }
+}
+
+.b_todo_header_title {
+  vertical-align: top;
+  display: inline-block;
+  font-size: 18px;
+  color: #fff;
+  text-shadow: 0 -1px 0 #000;
+  padding-left: 25px;
+  @include background('../img/icon_sprite.png', $position: 0 2px);
+}
+
+.b_todo_header_action_button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  div {
+	opacity: .3;
+  }
+
+}
+
+.b_todo_header_action_button_edit, .b_todo_header_action_button_delete {
+  @include background('../img/icon_sprite.png');
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  &:hover {
+	cursor: pointer;
+  }
+  &.b_save_list_title{
+	background-position: 0 -119px;
+  }
+}
+
+.b_todo_header_action_button_edit {
+  background-position: 0 -30px;
+  padding-right: 10px;
+
+}
+
+.b_todo_header_action_button_delete {
+  background-position: 50% -90px;
+  padding-left: 25px;
+  border-left: 1px solid #fff;
+}
+
+.b_todo_add_task {
+  background: #cfcfcf;
+  padding-bottom: 20px;
+  border: 1px solid #b2b2a2;
+  padding-top: 12px;
+  padding-left: 15px;
+}
+
+.b_todo_add_task_field {
+  height: 30px;
+  width: 545px;
+  border-radius: 6px 0 0 6px;
+  border: 1px solid #7f7f7f;
+  border-bottom: 1px solid #b2b2a2;
+  padding-left: 10px;
+  box-shadow: 0 1px 1px #707070 inset;
+  @include moo(box-sizing, border-box);
+  &:focus {
+	outline: none;
+  }
+}
+
+.b_todo_add_task_field::-webkit-input-placeholder {
+  font-style: italic;
+  color: #c8c8c8;
+}
+
+.b_todo_add_task_field::-moz-placeholder {
+  font-size: 14px;
+  font-style: italic;
+  color: #c8c8c8;
+}
+
+.b_todo_add_task_field:-ms-input-placeholder {
+  font-size: 14px;
+  font-style: italic;
+  color: #c8c8c8;
+}
+
+.b_todo_add_task_button {
+  display: inline-block;
+  height: 30px;
+  @include moo(box-sizing, border-box);
+  vertical-align: top;
+  margin-left: -4px;
+  border-radius: 0 6px 6px 0;
+  border: 1px solid #447557;
+  padding: 0 20px;
+  line-height: 26px;
+  color: #fff;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, .6);
+  @include moobg(linear-gradient(top, #94cbae 0%, #508767 100%));
+
+}
+
+.b_todo_list {
+  border: 1px solid #b6b3ab;
+  border-top: none;
+  background: #fff;
+  border-radius: 0 0 20px 20px;
+  padding-bottom: 25px;
+
+}
+
+.b_one_todo_check, .b_one_todo_description, .b_one_todo_action {
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+.b_one_todo_action {
+  div {
+	opacity: .3;
+  }
+}
+
+.b_one_todo {
+  border-bottom: 1px solid #e7ebea;
+  padding: 10px 15px;
+  position: relative;
+  &:hover {
+	.b_one_todo_change_position, .b_one_todo_edit, .b_one_todo_remove {
+	  opacity: .4;
+	  &:hover {
+		opacity: 1;
+		cursor: pointer;
+	  }
+	}
+	background-color: #fcfed5;
+  }
+}
+.b-add-list{
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 10px;
+  background: #dedede;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 1px 5px rgba(0,0,0, .3);
+  input{
+	padding: 10px;
+	width: 300px;
+	display: inline-block;
+  }
+}
+.b-task-is-done {
+  opacity: .5;
+  position: relative;
+	&:before{
+	  z-index: 10;
+	  position: absolute;
+	  left: 0;
+	  top: 51%;
+	  content: '';
+	  width: 100%;
+	  height: 1px;
+	  opacity: 1;
+	  background-color: #000;
+	}
+}
+
+.b_one_todo_check {
+  padding-right: 15px;
+}
+
+.b_one_todo_description {
+  padding: 0 20px;
+  width: 410px;
+  @include moo(box-sizing, border-box);
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  input[disabled] {
+	border: none;
+	background: inherit;
+	width: 100%;
+  }
+  input {
+	width: 100%;
+  }
+}
+.b_todo_header_title_edit_field{
+  position: absolute;
+  left: 40px;
+  top: 10px;
+  width: 530px;
+  input{
+	width: 100%;
+	font-size: 18px;
+  }
+}
+.hide_block{
+  display: none;
+}
+.b_one_todo_change_position, .b_one_todo_edit, .b_one_todo_remove {
+  @include background('../img/icon_sprite.png');
+  background-size: 100% auto;
+  width: 15px;
+  height: 15px;
+  margin: 0 15px;
+  display: inline-block;
+  vertical-align: top;
+  opacity: .3;
+
+}
+
+.b_one_todo_change_position {
+  background-position: 0 -116px;
+}
+
+.b_one_todo_edit {
+  background-position: center -21px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.b_one_todo_remove {
+  background-position: 0 -66px;
+}
+
+.b-data-picker-container{
+  display: inline-block;
+  width: 90px;
+  input{
+	width: 90px;
+  }
+}
+
+.deadline-end{
+  background-color: rgba(205, 92, 92, .5);
+  &:hover{
+	background-color: rgba(205, 92, 92, .5);
+  }
+}

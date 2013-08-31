@@ -1,0 +1,19 @@
+<div class="b_todo_header">
+	<div class="b_todo_header_title">
+		<%- title %>
+	</div>
+	<div class="b_todo_header_title_edit_field hide_block">
+		<input value="<%- title %>" type="text" class="b_edit_title_field"/>
+	</div>
+	<div class="b_todo_header_action_button">
+		<div class="b_todo_header_action_button_edit"></div>
+		<div class="b_todo_header_action_button_delete"></div>
+	</div>
+</div>
+<div class="b_todo_add_task">
+	<input type="text" class="b_todo_add_task_field" placeholder="Add New Task"/>
+
+	<div class="b_todo_add_task_button">Add Task</div>
+</div>
+<div class="b_todo_list" data-list-id="<%- _id ? _id : '' %>"></div>
+

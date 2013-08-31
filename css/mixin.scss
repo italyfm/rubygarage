@@ -1,0 +1,88 @@
+@mixin background($imgpath,$position:0 0,$repeat: no-repeat) {
+  background: {
+    image: url($imgpath);
+    position: $position;
+    repeat: $repeat;
+  }
+}
+
+$config: gradients webkit moz o,
+transform webkit moz ms o,
+transform-origin webkit moz ms o,
+box-sizing webkit moz;
+
+// Prefix for property
+@mixin moo($property, $value) {
+  $prefixes: getPrefix($property);
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: #{$value};
+  }
+  #{$property}: #{$value};
+}
+
+// Prefix for value
+@mixin moobg($gradients, $static: null) {
+  $prefixes: getPrefix(gradients);
+  @each $prefix in $prefixes {
+    $out: ();
+    @each $gradient in $gradients {
+      $gradientPrefixed: -#{$prefix}-#{$gradient};
+      $out: append($out, $gradientPrefixed, comma);
+    }
+    @if $static {
+      $out: join($out, #{$static}, comma);
+    }
+    background: $out;
+  }
+  $out: ();
+  @each $gradient in $gradients {
+    $out: append($out, $gradient, comma);
+  }
+  @if ($static) {
+    $out: join($out, #{$static}, comma);
+  }
+  background: $out;
+}
+
+// Clearfix
+@mixin clearfix {
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Keyframes
+@mixin keyframes($name) {
+  @-webkit-keyframes $name {@content;}
+  @-moz-keyframes $name {@content;}
+  @-o-keyframes $name {@content;}
+  @keyframes $name {@content;}
+}
+
+// Get prefixes from config
+@function getPrefix($property) {
+  $prefixes: webkit moz o;
+  @each $configItem in $config {
+    $defindedProperty: nth($configItem, 1);
+    @if $defindedProperty == $property {
+      $prefixes: ();
+      @each $prefix in $configItem {
+        @if $prefix != $defindedProperty {
+          $prefixes: append($prefixes, $prefix);
+        }
+      }
+    }
+  }
+  @return $prefixes;
+}
+
+@mixin retina() {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @content;
+  }
+}

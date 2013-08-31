@@ -1,0 +1,16 @@
+<div class="b_one_todo_check">
+	<input type="checkbox" <%= (todo.status === 'done') ? 'checked="checked"': ''%> />
+</div>
+<div class="b_one_todo_description">
+	<form name="editTodoItem" class="b_todo_input_form">
+		<input type="text" value="<%= todo.title %>" class="b_task_value" disabled/>
+	</form>
+</div>
+<div class="b-data-picker-container">
+	<input class="b-data-picker-input" value="<%- todo.date %>" type="text"/>
+</div>
+<div class="b_one_todo_action">
+	<div class="b_one_todo_change_position"></div>
+	<div class="b_one_todo_edit"></div>
+	<div class="b_one_todo_remove"></div>
+</div>
