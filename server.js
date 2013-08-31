@@ -58,25 +58,6 @@ app.delete( '/list/:listid/task/:taskid', function ( req, res ) {
 	getDataDB.deleteTask( req, res );
 } );
 
-app.get( '/delete-list', function ( req, res ) {
-	getDataDB.removeList( req, res );
-} );
-
-app.post( '/add-task', function ( req, res ) {
-	getDataDB.addTask( req, res );
-} );
-app.post( '/edit-item', function ( req, res ) {
-	getDataDB.editTask( req, res );
-} );
-app.delete( '/delete-item', function ( req, res ) {
-	getDataDB.deleteTask( req, res );
-} );
-
-
-app.delete( '/items', function ( req, res ) {
-	res.send( 'asd' );
-} );
-
 app.get( '/', function ( req, res ) {
 	res.sendfile( 'index.html' );
 } );
