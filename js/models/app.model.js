@@ -5,28 +5,14 @@ define( [
 		defaults: {
 			title: ''
 		},
-		urlRoot : '/',
+		urlRoot: '/',
 
-		url : function () {
+		url: function () {
 			return this.urlRoot + 'lists';
 		},
 
-		initialize : function () {
+		initialize: function () {
 			this.fetch()
-		},
-
-
-
-		editListTitleInDB : function () {
-			var self = this;
-			$.ajax( {
-				type : 'POST',
-				url  : 'edit-list',
-				data : {
-					id    : self.get( '_id' ),
-					title : self.get( 'title' )
-				}
-			} );
 		}
 
 	} );

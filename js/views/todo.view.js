@@ -4,25 +4,25 @@ define( [
 	'jquery-ui'
 ], function ( Backbone, TodoTemplate ) {
 	var todo_view = Backbone.View.extend( {
-			className : 'b_one_todo',
-			templates : {
-				todo : TodoTemplate
+			className: 'b_one_todo',
+			templates: {
+				todo: TodoTemplate
 			},
-			css       : {
-				done_task : 'b-task-is-done'
+			css: {
+				done_task: 'b-task-is-done'
 			},
-			selectors : {
-				form       : '.editTodoItem',
-				datepicker : '.b-data-picker-input'
+			selectors: {
+				form: '.editTodoItem',
+				datepicker: '.b-data-picker-input'
 			},
-			events    : {
-				'keypress .b_todo_input_form'   : 'editTaskOnEnter',
-				'click .b_one_todo_remove'      : 'removeTask',
-				'click .b_one_todo_check input' : 'changeDoneStatus',
-				'click .b_one_todo_edit'        : 'editTask'
+			events: {
+				'keypress .b_todo_input_form': 'editTaskOnEnter',
+				'click .b_one_todo_remove': 'removeTask',
+				'click .b_one_todo_check input': 'changeDoneStatus',
+				'click .b_one_todo_edit': 'editTask'
 			},
 
-			initialize : function () {
+			initialize: function () {
 				var self = this;
 				var todoOptions = this.model.toJSON();
 				self.render( todoOptions );
@@ -39,9 +39,9 @@ define( [
 				} );
 			},
 
-			render : function ( todoData ) {
+			render: function ( todoData ) {
 				var self = this;
-				var todoTemplate = _.template( this.templates.todo, {todo : todoData} );
+				var todoTemplate = _.template( this.templates.todo, {todo: todoData} );
 				if ( todoData.status !== 'inprogress' ) {
 					this.$el.addClass( self.css.done_task );
 				}
@@ -52,17 +52,17 @@ define( [
 				return this;
 			},
 
-			addIdTodo : function ( el, id ) {
+			addIdTodo: function ( el, id ) {
 				el.attr( 'data-task-id', id )
 				return this;
 			},
 
-			addPositionTodo : function ( el, position ) {
+			addPositionTodo: function ( el, position ) {
 				el.attr( 'data-task-position', position )
 				return this;
 			},
 
-			removeTask : function () {
+			removeTask: function () {
 				var self = this;
 				self.model.destroy();
 				self.remove();
@@ -70,14 +70,14 @@ define( [
 				self.undelegateEvents();
 			},
 
-			editTask : function () {
+			editTask: function () {
 				var self = this,
 					$el = this.$el.find( 'input[type="text"]' );
 				self.changeDisableField( $el );
 				self.model.set( 'title', $el.val() );
 			},
 
-			editTaskOnEnter : function ( e ) {
+			editTaskOnEnter: function ( e ) {
 				var self = this;
 				if ( e.keyCode == 13 ) {
 					self.editTask();
@@ -85,15 +85,15 @@ define( [
 				}
 			},
 
-			addDatePicker : function () {
+			addDatePicker: function () {
 				var self = this;
-				this.$el.find( this.selectors.datepicker ).datepicker( { dateFormat : "yy/mm/dd" } )
+				this.$el.find( this.selectors.datepicker ).datepicker( { dateFormat: "yy/mm/dd" } )
 				this.$el.find( this.selectors.datepicker ).on( 'change', function ( e ) {
 					self.$el.trigger( 'change:deadline' );
 				} )
 			},
 
-			changeDisableField : function ( $el ) {
+			changeDisableField: function ( $el ) {
 				if ( $el.prop( 'disabled' ) ) {
 					$el.prop( 'disabled', false );
 				} else {
@@ -101,14 +101,14 @@ define( [
 				}
 			},
 
-			changePosition : function () {
+			changePosition: function () {
 				var currPosition = this.$el.attr( 'data-task-position' );
 				this.model.set( 'position', parseInt( currPosition, 10 ) );
 			},
 
-			addDeadlineClass : function ( taskDate ) {
+			addDeadlineClass: function ( taskDate ) {
 				var selectDateTimeStamp = new Date( taskDate ).getTime();
-				var currTimeStamp = new Date( new Date().getFullYear() + '/' + (new Date().getMonth() + 1)  + '/' + new Date().getDate() ).getTime() ; //shit code:((
+				var currTimeStamp = new Date( new Date().getFullYear() + '/' + (new Date().getMonth() + 1) + '/' + new Date().getDate() ).getTime(); //shit code:((
 				if ( selectDateTimeStamp < currTimeStamp ) {
 					this.$el.addClass( 'deadline-end' );
 				} else {
@@ -116,18 +116,18 @@ define( [
 				}
 			},
 
-			changeDeadline : function () {
+			changeDeadline: function () {
 				var deadLine = this.$el.find( this.selectors.datepicker ).val();
 				this.model.set( 'date', deadLine );
 				this.addDeadlineClass( deadLine )
 			},
 
-			changeDoneStatus : function () {
+			changeDoneStatus: function () {
 				var self = this;
 				self.$el.toggleClass( self.css.done_task );
-				if ( self.model.get('status') !== 'done' ){
+				if ( self.model.get( 'status' ) !== 'done' ) {
 					self.model.set( 'status', 'done' );
-				} else{
+				} else {
 					self.model.set( 'status', 'inprogress' );
 				}
 

@@ -1,47 +1,47 @@
 {
-	"data" : [
+	"data": [
 		{
-			"title" : "Second Todo",
-			"id"    : 2,
-			"items" : [
+			"title": "Second Todo",
+			"id": 2,
+			"items": [
 				{
-					"description" : "Second Todo.Fast just got faster with Nexus S.",
-					"id"          : 1,
-					"position"    : 1
+					"description": "Second Todo.Fast just got faster with Nexus S.",
+					"id": 1,
+					"position": 1
 				},
 				{
-					"description" : "Second Todo.Fast just got d fadsaster with Nexus S.",
-					"id"          : 2,
-					"status"      : "done",
-					"position"    : 2
+					"description": "Second Todo.Fast just got d fadsaster with Nexus S.",
+					"id": 2,
+					"status": "done",
+					"position": 2
 				},
 				{
-					"description" : "Second Todo.Fast just got fadasdsster with Nexus S.",
-					"id"          : 3,
-					"position"    : 3,
-					"status"      : "done"
+					"description": "Second Todo.Fast just got fadasdsster with Nexus S.",
+					"id": 3,
+					"position": 3,
+					"status": "done"
 				}
 			]
 		},
 		{
-			"title" : "First Todo",
-			"id"    : "1",
-			"items" : [
+			"title": "First Todo",
+			"id": "1",
+			"items": [
 				{
-					"description" : "FirstTodo.Fast just got faster with Nexus S.",
-					"id"          : 1,
-					"status"      : "done",
-					"position"    : 3
+					"description": "FirstTodo.Fast just got faster with Nexus S.",
+					"id": 1,
+					"status": "done",
+					"position": 3
 				},
 				{
-					"description" : "FirstTodo.Fast just got d fadsaster with Nexus S.",
-					"id"          : 2,
-					"position"    : 2
+					"description": "FirstTodo.Fast just got d fadsaster with Nexus S.",
+					"id": 2,
+					"position": 2
 				},
 				{
-					"description" : "FirstTodo.Fast just got fadasdsster with Nexus S.",
-					"id"          : 3,
-					"position"    : 1
+					"description": "FirstTodo.Fast just got fadasdsster with Nexus S.",
+					"id": 3,
+					"position": 1
 				}
 			]
 		}

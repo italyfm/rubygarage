@@ -1,27 +1,27 @@
 require.config( {
-	baseUrl : 'js',
-	paths   : {
-		jquery      : '_libs/jquery-2.0.3.min',
-		underscore  : '_libs/underscore-min',
-		backbone    : '_libs/backbone',
-		'jquery-ui' : '_libs/jquery-ui-1.10.3.custom.min'
+	baseUrl: 'js',
+	paths: {
+		jquery: '_libs/jquery-2.0.3.min',
+		underscore: '_libs/underscore-min',
+		backbone: '_libs/backbone',
+		'jquery-ui': '_libs/jquery-ui-1.10.3.custom.min'
 	},
-	shim    : {
-		'backbone' : {
-			deps    : ['underscore', 'jquery'],
-			exports : 'Backbone'
+	shim: {
+		'backbone': {
+			deps: ['underscore', 'jquery'],
+			exports: 'Backbone'
 		},
-		underscore : {
-			exports : '_'
+		underscore: {
+			exports: '_'
 		}
 	}
 } );
 window.TodoApp = {
-	current : {
-		controller : []
+	current: {
+		controller: []
 	},
-	view    : {},
-	model   : {}
+	view: {},
+	model: {}
 };
 
 require( [
@@ -32,7 +32,7 @@ require( [
 ],
 	function ( Backbone, Router, AppView, ListsCollection ) {
 		TodoApp.view = new AppView( {
-			collection : new ListsCollection()
+			collection: new ListsCollection()
 		} );
 		Router.initialize();
 	} );

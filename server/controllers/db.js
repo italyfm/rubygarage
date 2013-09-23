@@ -3,14 +3,14 @@ var Mongo = require( 'mongodb' ),
 	BSON = Mongo.BSONPure,
 	ObjectID = require( 'mongodb' ).ObjectID,
 	remoteAdress = "mongodb://nodejitsu_dmfilipenko:6e92v5kn2dmeu06jruse5stclp@ds039267.mongolab.com:39267/nodejitsu_dmfilipenko_nodejitsudb3393854934";
-	//remoteAdress = "mongodb://root:pass@paulo.mongohq.com:10031/RubyGarage";
+//remoteAdress = "mongodb://root:pass@paulo.mongohq.com:10031/RubyGarage";
 
 exports.getLists = function ( req, res ) {
 	MongoClient.connect( remoteAdress, function ( err, db ) {
 		if ( err ) throw err;
 		db.collection( 'list', function ( err, collection ) {
-			collection.find().sort( {_id : 1, 'todos.position' : -1} ).toArray( function ( err, items ) {
-				res.json( { data : items } );
+			collection.find().sort( {_id: 1, 'todos.position': -1} ).toArray( function ( err, items ) {
+				res.json( { data: items } );
 			} );
 		} );
 	} );
@@ -18,15 +18,14 @@ exports.getLists = function ( req, res ) {
 
 exports.createLists = function ( req, res ) {
 	var url = require( 'url' );
-	var url_parts = url.parse( req.url, true );
-	var title = req.body.title
+	var title = req.body.title;
 	MongoClient.connect( remoteAdress, function ( err, db ) {
 		if ( err ) throw err;
 		db.collection( 'list', function ( err, collection ) {
-			collection.insert( {title : title}, function ( err, el ) {
+			collection.insert( {title: title}, function ( err, el ) {
 				el.forEach( function ( list ) {
-					collection.find( {title : title, _id : list['_id'] } ).toArray( function ( err, items ) {
-						res.json( { _id : items[0]['_id'] } )
+					collection.find( {title: title, _id: list['_id'] } ).toArray( function ( err, items ) {
+						res.json( { _id: items[0]['_id'] } )
 					} )
 				} );
 
@@ -37,15 +36,13 @@ exports.createLists = function ( req, res ) {
 
 exports.removeList = function ( req, res ) {
 	var url = require( 'url' );
-	var url_parts = url.parse( req.url, true );
 	var queryID = req.params.id;
-	console.log( queryID )
 	var objID = new ObjectID( queryID );
 	MongoClient.connect( remoteAdress, function ( err, db ) {
 		if ( err ) throw err;
 		db.collection( 'list', function ( err, collection ) {
-			collection.remove( { _id : objID }, function ( err, el ) {
-				res.json( { data : 'Successful delete' } )
+			collection.remove( { _id: objID }, function ( err, el ) {
+				res.json( { data: 'Successful delete' } )
 				console.log( el )
 			} );
 		} )
@@ -62,22 +59,19 @@ exports.editListTitle = function ( req, res ) {
 		if ( err ) throw err;
 		db.collection( 'list', function ( err, collection ) {
 			if ( todos ) {
-				console.log( todos )
-				collection.update( { _id : objID }, {
-					$set : {
-						title : newTitle,
-						todos : todos
+				collection.update( { _id: objID }, {
+					$set: {
+						title: newTitle,
+						todos: todos
 					}
 				}, function ( err, el ) {
-					console.log( 'ok', el )
 				} );
 			} else {
-				collection.update( { _id : objID }, {
-					$set : {
-						title : newTitle
+				collection.update( { _id: objID }, {
+					$set: {
+						title: newTitle
 					}
 				}, function ( err, el ) {
-					console.log( 'ok', el )
 				} );
 			}
 
@@ -96,18 +90,18 @@ exports.addTask = function ( req, res ) {
 	MongoClient.connect( remoteAdress, function ( err, db ) {
 		if ( err ) throw err;
 		db.collection( 'list', function ( err, collection ) {
-			collection.update( { _id : objID }, {
-				$push : {
-					todos : {
-						id       : idTask,
-						title    : newTitle,
-						status   : status,
-						position : position,
-						date     : date
+			collection.update( { _id: objID }, {
+				$push: {
+					todos: {
+						id: idTask,
+						title: newTitle,
+						status: status,
+						position: position,
+						date: date
 					}
 				}
 			}, function ( err, el ) {
-				res.json( {id : idTask} )
+				res.json( {id: idTask} )
 			} );
 		} )
 	} );
@@ -130,15 +124,15 @@ exports.editTask = function ( req, res ) {
 			_tempARRAY.forEach( function ( task ) {
 				position = parseInt( task.position, 10 )
 				collection.update( {
-					'_id'      : list_id,
-					'todos.id' : taskID
+					'_id': list_id,
+					'todos.id': taskID
 				}, {
-					$set : {
-						'todos.$' : {
-							id       : taskID,
-							title    : task.title,
-							status   : task.status,
-							position : position,
+					$set: {
+						'todos.$': {
+							id: taskID,
+							title: task.title,
+							status: task.status,
+							position: position,
 							date: task.date
 						}
 					}
@@ -153,14 +147,12 @@ exports.editTask = function ( req, res ) {
 
 exports.deleteTask = function ( req, res ) {
 	var url = require( 'url' );
-	var url_parts = url.parse( req.url, true );
 	var todo_id = req.params.taskid;
 	var list_id = new ObjectID( req.params.listid );
 	MongoClient.connect( remoteAdress, function ( err, db ) {
 		if ( err ) throw err;
 		db.collection( 'list', function ( err, collection ) {
-			collection.update( {'_id' : list_id, 'todos.id' : todo_id}, { $pull : { 'todos' : {id : todo_id }  } }, function ( err, el ) {
-				console.log( 'done delete', err, el )
+			collection.update( {'_id': list_id, 'todos.id': todo_id}, { $pull: { 'todos': {id: todo_id }  } }, function ( err, el ) {
 			} );
 		} )
 	} );
