@@ -125,7 +125,12 @@ define( [
 			changeDoneStatus : function () {
 				var self = this;
 				self.$el.toggleClass( self.css.done_task );
-				self.model.set( 'status', 'done' );
+				if ( self.model.get('status') !== 'done' ){
+					self.model.set( 'status', 'done' );
+				} else{
+					self.model.set( 'status', 'inprogress' );
+				}
+
 			}
 
 		} )
